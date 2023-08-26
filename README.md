@@ -1,3 +1,10 @@
+Create env.local with:
+GOOGLE_CLIENT_ID=yourid
+GOOGLE_CLIENT_SECRET=yourkey
+
+NEXTAUTH_SECRET="AI8R329RUFD3"
+NEXTAUTH_URL="http://localhost:3000"
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
