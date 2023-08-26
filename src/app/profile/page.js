@@ -9,34 +9,35 @@ const profile = () => {
 	useEffect(() => {
 		if (status === "loading") return;
 		setLoading(false);
-	}
-		, [status]);
+	}, [status]);
 
-	if (loading) return (
-
-		<>
-			<Skeleton variant="rounded" width="100%" height={80} sx={{ bgcolor: "grey.900", marginTop: ".875rem" }} />
-			<Skeleton variant="rounded" width="100%" height={80} sx={{ bgcolor: "grey.900", marginTop: ".875rem" }} />
-		</>
-
-	);
-
-
-
-
+	if (loading)
+		return (
+			<>
+				<Skeleton
+					variant="rounded"
+					width="100%"
+					height={80}
+					sx={{ bgcolor: "grey.900", marginTop: ".875rem" }}
+				/>
+				<Skeleton
+					variant="rounded"
+					width="100%"
+					height={80}
+					sx={{ bgcolor: "grey.900", marginTop: ".875rem" }}
+				/>
+			</>
+		);
 
 	return (
-		<>
-			<h2>Profile Page</h2>
-			<h3>This page is rendered on the client.</h3>
-
-			<p>
+		<div className="bg-gray-900 p-4 rounded-md min-h-screen">
+			<p className="text-gray-400">
 				<strong>Status:</strong> {status}
 			</p>
-			<p>
+			<p className="text-gray-400">
 				<strong>Session:</strong> {JSON.stringify(session, null, 2)}
 			</p>
-		</>
+		</div>
 	);
 };
 

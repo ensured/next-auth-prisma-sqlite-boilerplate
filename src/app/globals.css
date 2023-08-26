@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light dark;
+	color-scheme: light dark;
 }
 
 .form-slide-in {
-  max-height: 0;
-  overflow: hidden;
-  position: fixed;
-  right: 0;
-  width: 100%;
-  transition: max-height 0.444s ease-in-out;
+	max-height: 0;
+	overflow: hidden;
+	position: fixed;
+	right: 0;
+	width: 100%;
+	transition: max-height 0.33s ease-in-out;
 }
 
 .visible {
-  max-height: 1000px;
+	max-height: 1000px;
 }
