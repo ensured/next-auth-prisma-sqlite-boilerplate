@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { getRelativeTimeAgo } from "./Ago";
 const PostList = ({ posts, Btn }) => {
 	const { data: session } = useSession();
 	const router = useRouter();
@@ -26,20 +26,23 @@ const PostList = ({ posts, Btn }) => {
 						{posts.map((post) => (
 							<li
 								key={post.id}
-								className="bg-gray-800 p-4 rounded-md mb-4"
+								className="bg-gray-800 p-4 rounded-md mb-4 hover:bg-gray-700 cursor-pointer"
 								onClick={() => router.push(`/post/${post.id}`)}
 							>
-								<h3 className="text-gray-100 text-xl font-semibold mb-2">
-									{post.title}
-								</h3>
-								<p className="text-gray-300 line-clamp-3 break-all">
-									{post.content}
-								</p>
-								<p className="text-gray-400 mt-2">
-									{post.authorEmail}
+								<div className="pb-6 ">
+									<h3 className="text-gray-100 text-xl font-semibold mb-2">
+										{post.title}
+									</h3>
+									<p className="text-gray-300 line-clamp-3 break-all">
+										{post.content}
+									</p>
+								</div>
+
+								<p className="text-gray-500 mt-2 text-xs">
+									{createdAt(post.createdAt)}
 								</p>
 								<p className="text-gray-500 mt-2 text-xs">
-									{convertDate(post.createdAt)}
+									{lastUpdatedAt(post.updatedAt)}
 								</p>
 							</li>
 						))}
@@ -56,11 +59,13 @@ const PostList = ({ posts, Btn }) => {
 	);
 };
 
-const convertDate = (date) => {
-	const dateTime = new Date(date);
-	return dateTime.toLocaleString();
+const createdAt = (date) => {
+	const createdAt = getRelativeTimeAgo(date);
+	return `created ${createdAt}`;
 };
-
-export { convertDate };
+const lastUpdatedAt = (date) => {
+	const lastUpdatedAt = getRelativeTimeAgo(date);
+	return `last updated: ${lastUpdatedAt}`;
+};
 
 export default PostList;

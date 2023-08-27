@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function POST(request, response) {
-	const { title, content, id } = await request.json();
+	const { id, title, content } = await request.json();
+	const date = new Date();
 	const updatedPost = await prisma.post.update({
 		where: {
 			id: parseInt(id),
@@ -12,6 +13,7 @@ export async function POST(request, response) {
 		data: {
 			title,
 			content,
+			updatedAt: date,
 		},
 	});
 	revalidatePath("/post/" + id);

@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 export async function GET(request, response) {
 	let x = request.url;
 	const id = x.slice(x.lastIndexOf("/") + 1);
-	console.log(id);
 
 	// let session = await getServerSession();
 	// if (!session) {
