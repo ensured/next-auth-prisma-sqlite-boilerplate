@@ -5,22 +5,21 @@ import { revalidatePath } from "next/cache";
 import { authOptions } from "../auth/[...nextauth]";
 
 export async function POST(request, response) {
-	let session = await getServerSession();
-	// let session = await getServerSession(authOptions)
+  let session = await getServerSession();
+  // let session = await getServerSession(authOptions)
 
-	if (!session) {
-		return NextResponse.redirect("/api/auth/signin/google");
-	}
+  if (!session) {
+    return NextResponse.redirect("/api/auth/signin/google");
+  }
 
-	const { id, title, content } = await request.json();
-	const updatePost = await prisma.post.create({
-		data: {
-			title,
-			content,
-		},
-	});
+  const { authorEmail, title, content } = await request.json();
+  const updatePost = await prisma.post.create({
+    data: {
+      title,
+      content,
+      authorEmail,
+    },
+  });
 
-	revalidatePath("/post/" + id);
-	revalidatePath("/");
-	return NextResponse.json({ message: "Post created", updatePost });
+  return NextResponse.json({ message: "Post created", updatePost });
 }
